@@ -21,15 +21,15 @@ Configuration file for the Bellow App
             views: {
                 "nav": {
                     templateUrl: 'templates/nav/main-nav.html',
-                    controller: 'mainController'
+                    controller: 'mainNavController'
                 },
                 "side-nav": {
                     templateUrl: 'templates/nav/side-nav.html',
-                    controller: 'mainController'
+                    controller: 'sideNavController'
                 },
                 "main-content": {
                     templateUrl: 'templates/home.html',
-                    controller: 'mainController'
+                    controller: 'homeController'
                 }
             }
         })
@@ -39,15 +39,15 @@ Configuration file for the Bellow App
             views: {
                 "nav": {
                     templateUrl: 'templates/nav/main-nav.html',
-                    controller: 'mainController'
+                    controller: 'mainNavController'
                 },
                 "side-nav": {
                     templateUrl: 'templates/nav/side-nav.html',
-                    controller: 'mainController'
+                    controller: 'sideNavController'
                 },
                 "main-content": {
                     templateUrl: 'templates/home.html',
-                    controller: 'mainController'
+                    controller: 'homeController'
                 }
             }
         })
@@ -60,12 +60,16 @@ Configuration file for the Bellow App
                 }
             }
         })
-        .state('test', {
-            url: "/test",
+        .state('account', {
+            url: "/account",
             views: {
+                "nav": {
+                    templateUrl: 'templates/nav/main-nav.html',
+                    controller: 'mainNavController'
+                },
                 "main-content": {
-                    templateUrl: 'templates/home.html',
-                    controller: 'mainController'
+                    templateUrl: 'templates/account.html',
+                    controller: 'accountController'
                 }
             }
         })

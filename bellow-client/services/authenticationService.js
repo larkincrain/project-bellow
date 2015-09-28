@@ -22,11 +22,11 @@
             var deferred = $q.defer();
             
             apiService.authenticate(username, password) .then(function (result) {
-                console.log(result.message);
+                console.log(result);
                 deferred.resolve(result);
             });
             
-            return deferred;
+            return deferred.promise;
 
         }    //authenticate the user against the credentialing authority
 
