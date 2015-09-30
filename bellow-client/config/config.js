@@ -88,6 +88,10 @@ Configuration file for the Bellow App
             });
 
             $rootScope.$on("$stateChangeStart", function (event, next, curent) {
+
+                console.log('Do we have a token saved?');
+                console.log(authenticationService.isLoggedIn());
+
                 if (authenticationService.isLoggedIn() == false) {
                     $location.path("/login");
                 }

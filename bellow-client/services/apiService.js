@@ -39,7 +39,8 @@
             var return_obj = {
                 success: false,
                 token: null,
-                message: null
+                message: null,
+                email: null
             };
 
             if (email && password) {
@@ -57,6 +58,7 @@
                     return_obj.success = data.success;
                     return_obj.token = data.token;
                     return_obj.message = data.message;
+                    return_obj.email = email;
 
                     token = data.token;                     //Save our token for future use
 

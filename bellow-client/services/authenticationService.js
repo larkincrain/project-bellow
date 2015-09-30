@@ -13,6 +13,7 @@
 
         var userInfo;           //Stores the user's information
         var token = null;      //Stores the JWT that we have from the server
+        var email = null;       //
 
         function getUserInfo() {
             return userInfo;
@@ -21,8 +22,12 @@
 
             var deferred = $q.defer();
             
-            apiService.authenticate(username, password) .then(function (result) {
-                console.log(result);
+            apiService.authenticate(username, password).then(function (result) {
+                if (result.success) {
+                    token = result.token;   // Then we need to save the token for future use
+                    email = result.email;
+                }
+
                 deferred.resolve(result);
             });
             
