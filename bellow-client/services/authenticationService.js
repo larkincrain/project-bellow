@@ -12,8 +12,21 @@
     function authenticationService($http, $q, $window, $cookieStore, transformRequestAsFormPostService, config, $location, $state, apiService) {
 
         var userInfo;           //Stores the user's information
-        var token = null;      //Stores the JWT that we have from the server
-        var email = null;       //
+        var token;              //Stores the JWT that we have from the server
+        var email;              //Stores the email address of the user
+
+        function getToken() {
+            console.log('Users Token is: ');
+            console.log(token);
+
+            return token;
+        }
+        function getEmail() {
+            console.log('Users Email is: ');
+            console.log(email);
+
+            return email;
+        }
 
         function getUserInfo() {
             return userInfo;
@@ -76,8 +89,12 @@
         return {
             authenticate: authenticate,
             logout: logout,
+
+            getToken: getToken,
+            getEmail: getEmail,
             getUserInfo: getUserInfo,
             isLoggedIn: isLoggedIn,
+
             token: token,
             email: email
         };

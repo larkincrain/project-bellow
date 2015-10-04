@@ -13,14 +13,11 @@
         var user = {};
 
         function init() {
+            authenticationService.getToken();
+            authenticationService.getEmail();
 
-            console.log('token: ');
-            console.log(authenticationService.token);
-            console.log('Email address: ');
-            console.log(authenticationService.email);
-
-            if (authenticationService.email) {
-                apiService.getUserInfo(authenticationService.email).then(function (results) {
+            if (authenticationService.getEmail()) {
+                apiService.getUserInfo(authenticationService.getEmail()).then(function (results) {
                     console.log('user object: ');
                     console.log(results);
                 });
