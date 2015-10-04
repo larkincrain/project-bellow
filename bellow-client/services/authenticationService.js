@@ -26,6 +26,9 @@
                 if (result.success) {
                     token = result.token;   // Then we need to save the token for future use
                     email = result.email;
+
+                    console.log('email address: ')
+                    console.log(email);
                 }
 
                 deferred.resolve(result);
@@ -75,6 +78,8 @@
             logout: logout,
             getUserInfo: getUserInfo,
             isLoggedIn: isLoggedIn,
+            token: token,
+            email: email
         };
     }
 })();
