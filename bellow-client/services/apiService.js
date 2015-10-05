@@ -156,10 +156,13 @@
                     email: email
                 };
 
-                methodConnector(method, needToken, path, test, body).then(function (data) {
+                methodConnector(method, needToken, path, test, query).then(function (data) {
                     return_obj.success = data.success;
                     return_obj.message = data.message;
                     return_obj.userInfo = data.userInfo;
+
+                    console.log('Object to Return: ');
+                    console.log(return_obj);
 
                     deferred.resolve(return_obj);
                 });
@@ -183,7 +186,7 @@
         //On Success:
         //  success: true
         //  message: null
-        var editUuser = function (email, parameters, test) {
+        var editUser = function (email, parameters, test) {
 
             //The object whose promise we will return
             var deferred = q.defer();
@@ -347,7 +350,7 @@
             authenticate: authenticate,
             signup: signup,
             getUserInfo: getUserInfo,
-            editUuser: editUuser,
+            editUser: editUser,
 
             addPlace, addPlace
         };

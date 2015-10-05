@@ -290,6 +290,8 @@ apiRoutes.get('/user', function (req, res) {
     
     var email = req.query.email;
 
+    console.log(req.query);
+
     if (!email) {
         res.json({ success: false, message: 'No email address provided' });
     }
