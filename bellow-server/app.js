@@ -290,6 +290,7 @@ apiRoutes.get('/user', function (req, res) {
     
     var email = req.query.email;
 
+    console.log('The query string:');
     console.log(req.query);
 
     if (!email) {
