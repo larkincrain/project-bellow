@@ -162,7 +162,7 @@
                     return_obj.userInfo = data.userInfo;
 
                     console.log('Object to Return: ');
-                    console.log(return_obj);
+                    console.log(data);
 
                     deferred.resolve(return_obj);
                 });

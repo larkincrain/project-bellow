@@ -20,6 +20,8 @@
                 apiService.getUserInfo(authenticationService.getEmail()).then(function (results) {
                     console.log('user object: ');
                     console.log(results);
+
+                    user = results;
                 });
             } else {
                 console.log('no email address saved');
