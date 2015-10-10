@@ -85,10 +85,25 @@ https://github.com/google/material-design-icons
 }
 
 .login-background {
-    background: url(../images/iPadLogin_1536x2048.png) no-repeat center center fixed;
+    background: url(../images/kenya_office.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     height: 100%;
+}
+
+/* Map styles*/
+.map-wrapper {
+    position:relative;
+    height: 900px;
+    width: 100%;    
+}
+
+.angular-google-map-container { 
+    height : 100%; 
+    width : 100%; 
+    top : 0; 
+    left : 0; 
+    position : absolute;
 }

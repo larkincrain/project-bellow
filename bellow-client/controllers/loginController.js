@@ -8,7 +8,8 @@
 
     BellowApp.controller('loginController', function (authenticationService, $scope, $rootScope, toaster, $state, $timeout) {
 
-        console.log('in login controller');
+        // So we can show the login view
+        $scope.login = true;
 
         //Submit the form. Send the user's data to be authenticated
         $scope.submit = function () {

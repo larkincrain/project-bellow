@@ -11,6 +11,13 @@ var port = 8080;                                                                
 var secret = 'followyourfolly';                                                                         //The secret string used to verify web tokens
 var token_life = 1440;                                                                                  //How long a json web token will last
 
+var apiKeys = {
+    google: {
+        browser: 'AIzaSyDFJMCaUysMDGWfd68IsA-gLtkzdiaNjoI',
+        server: 'AIzaSyDfpSrpUmwgjeY6v76vY4zjAvmazleJhcQ'
+    }
+}
+
 module.exports.mongo_connection_string = mongo_connection_string;
 module.exports.port = port;
 module.exports.secret = secret;

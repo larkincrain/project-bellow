@@ -7,6 +7,7 @@
         'ui.bootstrap',                 //provides for angular bootstrap UI elements
         'ngMaterial',                   //Building material dependency
         'toaster',                      //Angular toaster
+        'uiGmapgoogle-maps',            //Google Maps
     ]);
 
 })();

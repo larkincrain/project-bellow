@@ -6,9 +6,15 @@ Configuration file for the Bellow App
     var BellowApp = angular.module('BellowApp');
 
     //Routing options
-    BellowApp.config(['$httpProvider', '$urlRouterProvider', '$stateProvider', function ($httpProvider, $urlRouterProvider, $stateProvider) {
+    BellowApp.config(['$httpProvider', '$urlRouterProvider', '$stateProvider', 'uiGmapGoogleMapApiProvider', function ($httpProvider, $urlRouterProvider, $stateProvider, uiGmapGoogleMapApiProvider) {
 
         console.log('start routing config');
+
+        uiGmapGoogleMapApiProvider.configure({
+            //    key: 'your api key',
+            v: '3.20', //defaults to latest 3.X anyhow
+            libraries: 'weather,geometry,visualization'
+        });
 
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
@@ -54,7 +60,7 @@ Configuration file for the Bellow App
         .state('login', {
             url: "/login",
             views: {
-                "main-content": {
+                "login": {
                     templateUrl: 'templates/login.html',
                     controller: 'loginController'
                 }
@@ -99,16 +105,42 @@ Configuration file for the Bellow App
 
         }]);
 
+    //API paths
     var apiPaths = {
         apiUrl: "http://52.88.12.200/api",												        //This needs to be the location of my node server
         test_apiUrl: "http://52.88.12.200/api/test",										//This needs to be the location of my node server test end point
     };
 
+    //Paths and app version
     var config = {
         apiPaths: apiPaths,
         version: '0.0.1'
     };
 
+    console.log('Defining global data structure');
+
+    //User's data to be used across all modules
+    var globalData = {
+        userInfo: {
+            email: ""
+        },
+        
+        userPosition: {
+            lat: 0,
+            lon: 0,
+            alt: 0
+        },
+
+        currentOrganization: {
+            name: "",
+            description: "",
+            accountType: "",               // What type of account the organization is using
+            usersRole: "",
+
+        },
+    }
+
     BellowApp.value('config', config);
+    BellowApp.value('globalData', globalData);
 
 })();

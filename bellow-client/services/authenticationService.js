@@ -9,7 +9,7 @@
     BellowApp.factory('authenticationService', ['$http', '$q', '$window', '$cookieStore', 'transformRequestAsFormPostService', 'config', '$location', '$state', 'apiService', authenticationService]);
 
     //The authentication service that will be used to log the user in, out, and will also store informationa about the user
-    function authenticationService($http, $q, $window, $cookieStore, transformRequestAsFormPostService, config, $location, $state, apiService) {
+    function authenticationService($http, $q, $window, $cookieStore, transformRequestAsFormPostService, config, $location, $state, apiService, globalData) {
 
         var userInfo;           //Stores the user's information
         var token;              //Stores the JWT that we have from the server
@@ -42,6 +42,12 @@
 
                     console.log('email address: ')
                     console.log(email);
+
+                    console.log('Global Data: ');
+                    console.log(globalData);
+
+                    globalData.userInfo = result;           // Save the users information
+                    globalData.userInfo.email = email;      // Save the user's email
                 }
 
                 deferred.resolve(result);
