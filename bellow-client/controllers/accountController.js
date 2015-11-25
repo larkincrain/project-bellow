@@ -24,13 +24,23 @@
             options: { draggable: true },
             events: {
                 dragend: function (marker, eventName, args) {
-                    log.log('marker dragend');
+                    console.log('marker dragend');
                     var lat = marker.getPosition().lat();
                     var lon = marker.getPosition().lng();
 
                     //Save the coordinates to the user's home position
-                    $scope.user.home.latitude = lat;
-                    $scope.user.home.longitude = lon;
+                    if (!$scope.user.home_location) {
+                        console.log('saving new property of home');
+                        $scope.user.home_location = {
+                            latitude: lat,
+                            longitude: lon
+                        }
+                    }
+                    else {
+                        console.log('saving existing property of home');
+                        $scope.user.home_location.latitude = lat;
+                        $scope.user.home_location.longitude = lon;
+                    }
 
                     $scope.marker.options = {
                         draggable: true,
@@ -90,8 +100,13 @@
                         longitude: globalData.userPosition.lon
                     };
 
-                    $scope.marker.coords.latitude = position.coords.latitude;
-                    $scope.marker.coords.longitude = position.coords.longitude;
+                    if ($scope.user.home_location) {
+                        $scope.marker.coords.latitude = $scope.user.home_location.latitude;
+                        $scope.marker.coords.longitude = $scope.user.home_location.longitude;
+                    } else {
+                        $scope.marker.coords.latitude = position.coords.latitude;
+                        $scope.marker.coords.longitude = position.coords.longitude;
+                    }
 
                     $timeout(function () {
                         $scope.$apply();
@@ -107,8 +122,10 @@
             }
         }
 
-        $scope.$watch('user', function () {
+        $scope.$watch('user.home_location', function () {
             console.log($scope.user);
+
+            apiService.editUser($scope.user.email, $scope.user, false);
         });
 
         init();

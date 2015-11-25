@@ -197,6 +197,9 @@
                 message: null,
             };
 
+            console.log('In edit user function of apiService');
+            console.log(email);
+
             if (email) {
 
                 //Let's attempt to sign this user up
@@ -323,6 +326,9 @@
             //TODO: flesh out the put HTTP verb
         }
         var postQuery = function (path, body) {
+
+            console.log('Parameters passed: ');
+            console.log(body);
 
             //Execute the query
             return $http({

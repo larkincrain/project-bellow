@@ -327,6 +327,14 @@ apiRoutes.post('/user/edit', function (req, res) {
         } else {
             console.log(UserSchema);
 
+            user = req.body;        //Uh oh, this could backfire easily, lets adventure
+
+            /*******************************************************************************
+            * This was an attempt to iterate through each key value and save only the ones
+            * that matched. But if we are sending the entire user data object over with
+            * each call to the edit function, then we can simply assign the user object to
+            * the new data that is coming over.
+            *
             _.forEach(req.body, function (n, key) {
                 if (UserSchema.path(key)) {
                     //Then we can save the request body parameter to the user's profile
@@ -337,6 +345,7 @@ apiRoutes.post('/user/edit', function (req, res) {
                 else
                     console.log('We dont have this property: ' + key);
             });
+            **************************************************************************/
 
             //After updating the user's document with the changes, we need to save the changes
             user.save(function (err, user) { 
