@@ -48,7 +48,12 @@ var userSchema = new Schema({
                         request_type: String,			//If the user sent or received this request
                     }
                 }]
-        }]
+    }],
+    home_location: {
+        name: String,
+        latitude: String,
+        longitude: String
+    }
 });
 
 module.exports.User = mongoose.model('User', userSchema);

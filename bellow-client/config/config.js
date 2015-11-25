@@ -6,7 +6,7 @@ Configuration file for the Bellow App
     var BellowApp = angular.module('BellowApp');
 
     //Routing options
-    BellowApp.config(['$httpProvider', '$urlRouterProvider', '$stateProvider', 'uiGmapGoogleMapApiProvider', function ($httpProvider, $urlRouterProvider, $stateProvider, uiGmapGoogleMapApiProvider) {
+    BellowApp.config(['$httpProvider', '$urlRouterProvider', '$stateProvider', 'uiGmapGoogleMapApiProvider', 'localStorageServiceProvider', function ($httpProvider, $urlRouterProvider, $stateProvider, uiGmapGoogleMapApiProvider, localStorageServiceProvider) {
 
         console.log('start routing config');
 
@@ -19,9 +19,13 @@ Configuration file for the Bellow App
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
+        //Set up local storage
+        localStorageServiceProvider
+            .setPrefix('bellow')
+            .setStorageType('sessionStorage');
+
         // $urlRouteProvider.otherwise('/landing');
         $stateProvider
-
         .state('enter', {
             url: "",
             views: {
@@ -107,8 +111,8 @@ Configuration file for the Bellow App
 
     //API paths
     var apiPaths = {
-        apiUrl: "http://54.149.45.146/api",												        //This needs to be the location of my node server
-        test_apiUrl: "http://54.149.45.146/api/test",										//This needs to be the location of my node server test end point
+        apiUrl: "http://52.23.242.205:8080/api",												        //This needs to be the location of my node server
+        test_apiUrl: "http://52.23.242.205:8080/api/test",										//This needs to be the location of my node server test end point
     };
 
     //Paths and app version
@@ -131,13 +135,19 @@ Configuration file for the Bellow App
             alt: 0
         },
 
-        currentOrganization: {
-            name: "",
-            description: "",
-            accountType: "",               // What type of account the organization is using
-            usersRole: "",
+        organizations: {
+            all: [{
+            }],
 
-        },
+            currentOrganization: {
+                name: "",
+                description: "",
+                accountType: "",               // What type of account the organization is using
+                usersRole: "",
+
+            },
+        }
+
     }
 
     BellowApp.value('config', config);

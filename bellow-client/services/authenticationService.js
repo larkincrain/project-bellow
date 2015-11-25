@@ -6,10 +6,10 @@
 
     var BellowApp = angular.module('BellowApp');
 
-    BellowApp.factory('authenticationService', ['$http', '$q', '$window', '$cookieStore', 'transformRequestAsFormPostService', 'config', '$location', '$state', 'apiService', authenticationService]);
+    BellowApp.factory('authenticationService', ['$http', '$q', '$window', '$cookieStore', 'transformRequestAsFormPostService', 'config', '$location', '$state', 'apiService', 'globalData', 'localStorageService', authenticationService]);
 
     //The authentication service that will be used to log the user in, out, and will also store informationa about the user
-    function authenticationService($http, $q, $window, $cookieStore, transformRequestAsFormPostService, config, $location, $state, apiService, globalData) {
+    function authenticationService($http, $q, $window, $cookieStore, transformRequestAsFormPostService, config, $location, $state, apiService, globalData, localStorageService) {
 
         var userInfo;           //Stores the user's information
         var token;              //Stores the JWT that we have from the server
@@ -29,7 +29,11 @@
         }
 
         function getUserInfo() {
-            return userInfo;
+            var deferred = $q.defer();
+
+            deferred.resolve(userInfo);
+
+            return deferred.promise;
         }                       //return's the user's information
         function authenticate(username, password) {
 
@@ -40,14 +44,12 @@
                     token = result.token;   // Then we need to save the token for future use
                     email = result.email;
 
-                    console.log('email address: ')
-                    console.log(email);
-
-                    console.log('Global Data: ');
-                    console.log(globalData);
-
                     globalData.userInfo = result;           // Save the users information
                     globalData.userInfo.email = email;      // Save the user's email
+
+                    //save the user's information in a cookie or whatever
+                    localStorageService.set('bellowJWT', token);
+
                 }
 
                 deferred.resolve(result);
@@ -61,8 +63,7 @@
             console.log('logout');
             userInfo = null;
             token = null;
-            $window.sessionStorage["bellowJWT"] = null;
-            //$cookieStore.remove("BellowAuthCookie");
+            localStorage.remove('bellowJWT');
             $state.go("login");
         }                            //de-authenticate the user
         function isLoggedIn() {
@@ -76,8 +77,10 @@
         }                        //returns true if the userInfo variable is not null
         function init() {
 
-            if ($window.sessionStorage["bellowJWT"]) {
-                token = $window.sessionStorage["bellowJWT"];
+            console.log('try to get web token');
+
+            if (localStorageService.get('bellowJWT')) {
+                token = localStorageService.get("bellowJWT");
             }
             else {
                 console.log('Couldnt find any saved tokens, user is not authenticated');

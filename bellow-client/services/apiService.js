@@ -159,10 +159,10 @@
                 methodConnector(method, needToken, path, test, query).then(function (data) {
                     return_obj.success = data.success;
                     return_obj.message = data.message;
-                    return_obj.userInfo = data.userInfo;
+                    return_obj.userInfo = data;
 
                     console.log('Object to Return: ');
-                    console.log(data);
+                    console.log(return_obj);
 
                     deferred.resolve(return_obj);
                 });

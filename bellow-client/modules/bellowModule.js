@@ -8,6 +8,8 @@
         'ngMaterial',                   //Building material dependency
         'toaster',                      //Angular toaster
         'uiGmapgoogle-maps',            //Google Maps
+        'LocalStorageModule',           //Angular local storage
+        'flow',                         //Angular drag and drop file uploader
     ]);
 
 })();
