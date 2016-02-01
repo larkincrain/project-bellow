@@ -621,8 +621,19 @@ apiRoutes.post('/groups/edit', function (req, res) {
                     //user.path[key] = n;
                     console.log('We have this property: ' + key);
                 }
-                else
-                    console.log('We dont have this property: ' + key);
+                else {
+
+                    //Check to see if we have a child property that matches
+                    if (GroupSchema.path(key) !== null && typeof GroupSchema.path(key) == 'object'){
+                        for (var property in GroupSchema.path(key)) {
+                            if (GroupSchema.path(key).hasOwnProperty(property)) {
+                                console.log(GroupSchema.path(key) + '.' + property);
+                            }
+                        }
+                    } else {
+                        console.log('We dont have this property: ' + key);
+                    }
+                }
             });
 
             //After updating the user's document with the changes, we need to save the changes
