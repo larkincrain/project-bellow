@@ -197,16 +197,15 @@
                 message: null,
             };
 
-            console.log('In edit user function of apiService');
-            console.log(email);
-
             if (email) {
 
-                //Let's attempt to sign this user up
+                //Let's attempt to edit the user's profile
                 var method = "post";
                 var needToken = true;
                 var path = "/user/edit";
                 var body = parameters;
+
+
 
                 //Add the email to the body of the POST parameters
                 body.email = email;
@@ -330,6 +329,7 @@
             console.log('Parameters passed: ');
             console.log(body);
 
+            
             //Execute the query
             return $http({
                 url: path,

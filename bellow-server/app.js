@@ -310,6 +310,7 @@ apiRoutes.get('/user', function (req, res) {
 //is going to be edited. In this method, we will pass certain keys that can be used to update the user's profile.
 //The only required parameter is the one to identify the user, which is the email address
 apiRoutes.post('/user/edit', function (req, res) {
+
     //Since we don't require that the application submits all of the properties of a user's profile, only the ones
     //that were altered, we will have to loop through each element in the request body, find the key name, and see
     //if it matches a parameter in the user schema (to be safe) and then update that property with the passed in value.
@@ -327,9 +328,10 @@ apiRoutes.post('/user/edit', function (req, res) {
         } else {
             console.log(UserSchema);
 
-            
-            
             _.forEach(req.body, function (n, key) {
+
+                //so for each property in the request body, we need to flatten it                
+
                 if (UserSchema.path(key)) {
                     //Then we can save the request body parameter to the user's profile
                     user.set(key, n);
@@ -337,6 +339,20 @@ apiRoutes.post('/user/edit', function (req, res) {
                     console.log('We have this property: ' + key);
                 }
                 else
+
+                    Object.keys(key).forEach(function (childkey, index) {
+                        // key: the name of the object key
+                        // index: the ordinal position of the key within the object 
+
+                        if (UserSchema.path(key + "." + childkey)) {
+                            //Then we can save the request body parameter to the user's profile
+                            user.set(key + "." + childkey, n);
+                            //user.path[key] = n;
+                            console.log('We have this property: ' + key + "." + childkey);
+                        }
+
+                    });
+
                     console.log('We dont have this property: ' + key);
             });
             
@@ -353,6 +369,11 @@ apiRoutes.post('/user/edit', function (req, res) {
         email: email 
     }, gotUser);
 });
+
+//Intermediate function used to help store user profile properties
+var recursiveSaveMethod = function (payload, path, locationToSave) {
+
+}
 
 //Region: places
 

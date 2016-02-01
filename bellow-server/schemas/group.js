@@ -39,7 +39,10 @@ var groupSchema = new Schema({
         },
         name: String,                   //The name of the office
     }],
-    types: [String]                     //What labels are associated with the group
+    types: [String],                    //What labels are associated with the group
+    members: [{
+        member: user
+    }]
 });
 
 module.exports.Group = mongoose.model('Group', groupSchema);
