@@ -41,7 +41,7 @@ var groupSchema = new Schema({
     }],
     types: [String],                    //What labels are associated with the group
     members: [{
-        member: user
+        user_id: ObjectId
     }]
 });
 
