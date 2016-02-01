@@ -615,23 +615,30 @@ apiRoutes.post('/groups/edit', function (req, res) {
             console.log(GroupSchema);
 
             _.forEach(req.body, function (n, key) {
-                if (GroupSchema.path(key)) {
-                    //Then we can save the request body parameter to the user's profile
-                    group.set(key, n);
-                    //user.path[key] = n;
-                    console.log('We have this property: ' + key);
+
+                if (key != null && typeof key != 'object') {
+
+                    if (GroupSchema.path(key)) {
+                        //Then we can save the request body parameter to the user's profile
+                        group.set(key, n);
+                        //user.path[key] = n;
+                        console.log('We have this property: ' + key);
+                    } else {
+                        console.log('We do not have this property: ' + key);
+                    }
                 }
                 else {
 
                     //Check to see if we have a child property that matches
-                    if (GroupSchema.path(key) !== null && typeof GroupSchema.path(key) == 'object'){
-                        for (var property in GroupSchema.path(key)) {
-                            if (GroupSchema.path(key).hasOwnProperty(property)) {
-                                console.log(GroupSchema.path(key) + '.' + property);
+                    if (key !== null){
+                        for (var property in key) {
+                            if (key.hasOwnProperty(property)) {
+                                console.log(key + '.' + property);
+                                group.set(key + "." + property, n);
                             }
                         }
                     } else {
-                        console.log('We dont have this property: ' + key);
+                        console.log('We dont have this child property: ' + key);
                     }
                 }
             });
