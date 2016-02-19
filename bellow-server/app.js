@@ -328,6 +328,12 @@ apiRoutes.post('/user/edit', function (req, res) {
         } else {
             console.log(UserSchema);
 
+
+            //lets loop through the body parameter passed in and print all of the child keys
+            for (var key in req.body) {
+                var value = req.body[key];
+            }
+
             _.forEach(req.body, function (n, key) {
 
                 //so for each property in the request body, we need to flatten it                
