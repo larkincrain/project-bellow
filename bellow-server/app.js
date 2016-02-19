@@ -331,8 +331,11 @@ apiRoutes.post('/user/edit', function (req, res) {
             console.log('Lets print off all the properties: ');
             //lets loop through the body parameter passed in and print all of the child keys
             for (var key in req.body) {
-                var value = req.body[key];
-                console.log('Property: ' + key + ' has value: ' + value);
+                for (var child_key in key) {
+
+                    var value = req.body[key][child_key];
+                    console.log('Property: ' + key + "." + child_key + ' has value: ' + value);
+                }
             }
 
             _.forEach(req.body, function (n, key) {
