@@ -338,8 +338,7 @@ apiRoutes.post('/user/edit', function (req, res) {
                     //user.path[key] = n;
                     console.log('We have this property: ' + key);
                 }
-                else
-
+                else {
                     Object.keys(key).forEach(function (childkey, index) {
                         // key: the name of the object key
                         // index: the ordinal position of the key within the object 
@@ -352,10 +351,8 @@ apiRoutes.post('/user/edit', function (req, res) {
                             //user.path[key] = n;
                             console.log('We have this property: ' + key + "." + childkey);
                         }
-
                     });
-
-                    //console.log('We dont have this property: ' + key);
+                }
             });
             
 
