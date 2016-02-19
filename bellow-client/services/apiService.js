@@ -205,8 +205,6 @@
                 var path = "/user/edit";
                 var body = parameters;
 
-
-
                 //Add the email to the body of the POST parameters
                 body.email = email;
 

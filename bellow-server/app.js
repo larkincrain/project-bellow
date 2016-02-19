@@ -353,7 +353,7 @@ apiRoutes.post('/user/edit', function (req, res) {
 
                     });
 
-                    console.log('We dont have this property: ' + key);
+                    //console.log('We dont have this property: ' + key);
             });
             
 
