@@ -344,6 +344,8 @@ apiRoutes.post('/user/edit', function (req, res) {
                         // key: the name of the object key
                         // index: the ordinal position of the key within the object 
 
+                        console.log('trying: ' + key + "." + childkey);
+
                         if (UserSchema.path(key + "." + childkey)) {
                             //Then we can save the request body parameter to the user's profile
                             user.set(key + "." + childkey, n);
