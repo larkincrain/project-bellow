@@ -376,7 +376,7 @@ apiRoutes.post('/user/edit', function (req, res) {
 var recursiveSaveMethod = function (payload, path) {
     //then we need to call the function again
     for (var property in payload){
-        if (obj.hasOwnProperty(property)) {
+        if (payload.hasOwnProperty(property)) {
             if (typeof payload[property] == "object") {
                 recursiveSaveMethod(payload.property, path + '.' + property);
             } else {
