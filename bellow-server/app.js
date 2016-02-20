@@ -326,22 +326,15 @@ apiRoutes.post('/user/edit', function (req, res) {
         if (!user) {
             res.json({ success: false, message: 'Email address not found.' });
         } else {
+            console.log('printing user schema');
             console.log(UserSchema);
 
-            console.log('Lets print off all the properties: ');
-            //lets loop through the body parameter passed in and print all of the child keys
-            for (var key in req.body) {
-                for (var child_key in key) {
-
-                    var value = req.body[key][child_key];
-                    console.log('Property: ' + key + "." + child_key + ' has value: ' + value);
-                }
-            }
+            console.log('printing all properties passed in: ');
+            recursiveSaveMethod(req.body, '');
 
             _.forEach(req.body, function (n, key) {
 
                 //so for each property in the request body, we need to flatten it                
-
                 if (UserSchema.path(key)) {
                     //Then we can save the request body parameter to the user's profile
                     user.set(key, n);
@@ -380,8 +373,19 @@ apiRoutes.post('/user/edit', function (req, res) {
 });
 
 //Intermediate function used to help store user profile properties
-var recursiveSaveMethod = function (payload, path, locationToSave) {
-
+var recursiveSaveMethod = function (payload, path) {
+    //then we need to call the function again
+    for (var property in payload){
+        if (obj.hasOwnProperty(property)) {
+            if (typeof obj[property] == "object") {
+                recursiveSaveMethod(payload.property, path + '.' + property);
+            } else {
+                //Let's try to save this property using the path
+                //But for now we need to just print the path and the property
+                console.log(path + '.' + property);
+            }
+        }
+    }
 }
 
 //Region: places
