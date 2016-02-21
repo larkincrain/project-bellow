@@ -378,7 +378,7 @@ var recursiveSaveMethod = function (payload, path) {
     for (var property in payload){
         if (payload.hasOwnProperty(property)) {
             if (typeof payload[property] == "object") {
-                recursiveSaveMethod(payload.property, path + '.' + property);
+                recursiveSaveMethod(payload[property], path + '.' + property);
             } else {
                 //Let's try to save this property using the path
                 //But for now we need to just print the path and the property
